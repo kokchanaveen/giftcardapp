@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "userName": "Naveen",
+    "password": "Demo123",
+    "email": "123@codingthesmartway.com"
+  },
+  {
+    "id": 1,
+    "userName": "Sachin",
+    "password": "Demo123",
+    "email": "111@codingthesmartway.com"
+  },
+  {
+    "id": 1,
+    "userName": "Tavish",
+    "password": "Demo123",
+    "email": "222@codingthesmartway.com"
+  }
+]
