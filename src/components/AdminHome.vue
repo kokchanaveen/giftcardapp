@@ -76,7 +76,7 @@ export default {
 
     refreshData() {
       orderservice
-        .getUserOrders(store.state.userSession[0])
+        .getOrders()
         .then((data) => {
           this.orderList = data;
           //this.updatedorderList = data;

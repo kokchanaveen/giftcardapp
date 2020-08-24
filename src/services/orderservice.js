@@ -59,6 +59,17 @@ class orderservice {
       }
     );
   }
+
+  getOrders() {
+    return axios.get(this.baseUrl + "orders").then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   createOrder(
     orderDate,
     userName,
