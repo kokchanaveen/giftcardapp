@@ -26,6 +26,7 @@ class orderservice {
           })
           .then(
             (response) => {
+              console.log(response.data);
               return response.data;
             },
             (error) => {
@@ -33,15 +34,12 @@ class orderservice {
             }
           );
       })
-      .catch(function(response) {
-        console.log(response);
-      });
+      .catch();
   }
 
   getOrderByOrderId(orderId) {
     return axios.get(this.baseUrl + "orders/" + orderId + "/").then(
       (response) => {
-        console.log(response.data);
         return response.data;
       },
       (error) => {

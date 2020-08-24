@@ -13,6 +13,20 @@
       "password": "user123",
       "email": "user@gmail.com",
       "admin": "0"
+    },
+    {
+      "id": 1598254535206,
+      "userName": "NaveenAdmin",
+      "password": "Admin",
+      "email": "123",
+      "admin": "1"
+    },
+    {
+      "id": 1598288150286,
+      "userName": "participant",
+      "password": "participant",
+      "email": "participant@email.com",
+      "admin": "0"
     }
   ]
 }

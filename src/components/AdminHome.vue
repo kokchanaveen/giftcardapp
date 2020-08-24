@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div><h2>Admin Home Page</h2></div>
+  <div key="componentKey">
+    <div>
+      <h2>Admin Home Page</h2>
+    </div>
     <br />
     <br />
     <table class="table table-striped">
@@ -41,11 +43,16 @@
 <script>
 import { store } from "../helpers/store.js";
 import orderservice from "../services/orderservice.js";
+// global
+//import Vue from "vue";
+
 export default {
   name: "AdminHome",
   data() {
     return {
-      orderList: [],
+      orderList: "",
+      renderComponent: true,
+      componentKey: 0,
     };
   },
   methods: {
@@ -67,20 +74,28 @@ export default {
       } catch (err) {
         this.refreshData();
       }
-      this.$router.push({ name: "AdminHome" }).catch((error) => {
-        if (error.name != "NavigationDuplicated") {
-          throw error;
-        }
+      this.refreshData();
+
+      // remove the my-component component from the DOM
+      this.renderComponent = false;
+
+      this.$nextTick(() => {
+        // add my-component component in DOM
+        this.renderComponent = true;
       });
+
+      // Vue.forceUpdate();
+      this.componentKey += 1;
     },
 
     refreshData() {
+      this.orderList = "";
       orderservice
         .getOrders()
         .then((data) => {
+          //this.$set(this.orderList, data);
           this.orderList = data;
-          //this.updatedorderList = data;
-          console.log(data); // now the data is accessable from here.
+          console.log(this.orderList); // now the data is accessable from here.
         })
         .catch(function(response) {
           console.log(response);

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import AsyncComputed from "vue-async-computed";
 import Router from "vue-router";
 import UserLogin from "@/components/UserLogin";
 import AdminHome from "@/components/AdminHome";
@@ -7,6 +8,7 @@ import Logout from "@/components/Logout";
 import NewOrder from "@/components/NewOrder";
 import OrderHistory from "@/components/OrderHistory";
 Vue.use(Router);
+Vue.use(AsyncComputed);
 /* eslint-disable */
 export default new Router({
   routes: [
