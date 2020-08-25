@@ -3,6 +3,7 @@ import AsyncComputed from "vue-async-computed";
 import Router from "vue-router";
 import UserLogin from "@/components/UserLogin";
 import AdminHome from "@/components/AdminHome";
+import AdminMonthlyReport from "@/components/AdminMonthlyReport";
 import RegisterUser from "@/components/RegisterUser";
 import Navigation from "@/components/Navigation";
 import Logout from "@/components/Logout";
@@ -24,7 +25,12 @@ export default new Router({
       component: Navigation,
     },
     {
-      path: "/AdminHome ",
+      path: "/AdminMonthlyReport",
+      name: "AdminMonthlyReport",
+      component: AdminMonthlyReport,
+    },
+    {
+      path: "/AdminHome",
       name: "AdminHome",
       component: AdminHome,
     },

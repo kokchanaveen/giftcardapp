@@ -31,6 +31,24 @@
                 tag="li"
                 active-class="active"
                 class="nav-link"
+                to="/AdminHome"
+                v-if="userAdmin && showLogout"
+              >Admin Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                tag="li"
+                active-class="active"
+                class="nav-link"
+                to="/AdminMonthlyReport"
+                v-if="userAdmin && showLogout"
+              >Admin Report</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                tag="li"
+                active-class="active"
+                class="nav-link"
                 to="/NewOrder"
                 v-if="!userAdmin && showLogout"
               >New Order</router-link>
@@ -50,10 +68,10 @@
           </ul>
         </div>
         <div v-if="showLogout" style="float: right;" class="navbar-item">
-          <span>Logged in User:&emsp;</span>
+          <span class="nav-item">Logged in User:&emsp;</span>
           <strong>{{ loggedInUser }}</strong>
           &emsp;
-          <span>UserMode:&emsp;</span>
+          <span class="nav-item">UserMode:&emsp;</span>
           <strong>{{ userMode }}</strong>
         </div>
       </div>
@@ -109,7 +127,7 @@ export default {
   margin-top: 60px;
 }
 .moveInUp-enter-active {
-  animation: fadeIn 2s ease-in;
+  animation: fadeIn 1s ease-in;
 }
 @keyframes fadeIn {
   0% {
@@ -124,7 +142,7 @@ export default {
 }
 
 .moveInUp-leave-active {
-  animation: moveInUp 0.3s ease-in;
+  animation: moveInUp 0.1s ease-in;
 }
 @keyframes moveInUp {
   0% {
