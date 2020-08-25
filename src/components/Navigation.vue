@@ -18,20 +18,34 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/Register" v-if="!showLogout">Register</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/NewOrder" v-if="!userAdmin && showLogout">New Order</router-link>
+              <router-link
+                tag="li"
+                active-class="active"
+                class="nav-link"
+                to="/Register"
+                v-if="!showLogout"
+              >Register</router-link>
             </li>
             <li class="nav-item">
               <router-link
+                tag="li"
+                active-class="active"
+                class="nav-link"
+                to="/NewOrder"
+                v-if="!userAdmin && showLogout"
+              >New Order</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                tag="li"
+                active-class="active"
                 class="nav-link"
                 to="/OrderHistory"
                 v-if="!userAdmin && showLogout"
               >Order History</router-link>
             </li>
             <li class="nav-item" v-if="showLogout">
-              <router-link class="nav-link" to="/Logout">Logout</router-link>
+              <router-link tag="li" active-class="active" class="nav-link" to="/Logout">Logout</router-link>
             </li>
           </ul>
         </div>
