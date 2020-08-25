@@ -1,13 +1,12 @@
 <template>
   <div>
+    <Navigation></Navigation>
     <h2>Login</h2>
 
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
-        <div v-show="submitted && !userFound">
-          <span style="color:red">
-            Invalid Username/Password provided. Please retry</span
-          >
+        <div v-show="submitted && showInvalid">
+          <span style="color:red">Invalid Username/Password provided. Please retry</span>
         </div>
         <label for="username">Username</label>
         <input
@@ -17,9 +16,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !username }"
         />
-        <div v-show="submitted && !username" class="invalid-feedback">
-          Username is required
-        </div>
+        <div v-show="submitted && !username" class="invalid-feedback">Username is required</div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -30,14 +27,10 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !password }"
         />
-        <div v-show="submitted && !password" class="invalid-feedback">
-          Password is required
-        </div>
+        <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">
-          Login
-        </button>
+        <button class="btn btn-primary">Login</button>
       </div>
     </form>
   </div>
@@ -48,8 +41,10 @@
 import axios from "axios";
 import userservice from "../services/userservice.js";
 import { store } from "../helpers/store.js";
+import Navigation from "@/components/Navigation";
 export default {
   name: "UserLogin",
+  components: { Navigation },
   data() {
     return {
       userFound: false,
@@ -58,6 +53,7 @@ export default {
       submitted: false,
       userData: [],
       baseUrl: process.env.VUE_APP_BASE_URL,
+      showInvalid: false,
     };
   },
   created() {
@@ -67,7 +63,7 @@ export default {
         this.userData = data;
         console.log(data); // now the data is accessable from here.
       })
-      .catch(function(response) {
+      .catch(function (response) {
         console.log(response);
       });
     store.clearAdmin();
@@ -76,10 +72,10 @@ export default {
   methods: {
     handleSubmit(e) {
       this.submitted = true;
-      console.log(store.state.adminCollection.length);
       const { username, password } = this;
       if (username && password) {
-        this.userData.forEach((user) => {
+        for (var i = 0; i < this.userData.length; i++) {
+          var user = this.userData[i];
           if (user.userName === username && user.password === password) {
             this.userFound = true;
             store.addSession(user.userName);
@@ -89,13 +85,17 @@ export default {
             } else {
               this.$router.push({ name: "NewOrder" });
             }
-          } else {
-            this.userFound = false;
-            store.clearAdmin();
-            store.clearSession();
-            console.log(this.userFound);
+            break;
           }
-        });
+        }
+
+        if (!this.userFound) {
+          /* for each else block */
+          this.userFound = false;
+          this.showInvalid = true;
+          store.clearAdmin();
+          store.clearSession();
+        }
       }
     },
   },

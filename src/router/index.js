@@ -4,6 +4,7 @@ import Router from "vue-router";
 import UserLogin from "@/components/UserLogin";
 import AdminHome from "@/components/AdminHome";
 import RegisterUser from "@/components/RegisterUser";
+import Navigation from "@/components/Navigation";
 import Logout from "@/components/Logout";
 import NewOrder from "@/components/NewOrder";
 import OrderHistory from "@/components/OrderHistory";
@@ -16,6 +17,11 @@ export default new Router({
       path: "/",
       name: "Login",
       component: UserLogin,
+    },
+    {
+      path: "/",
+      name: "Navigation",
+      component: Navigation,
     },
     {
       path: "/AdminHome ",

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navigation></Navigation>
     <h2>Place New Order</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
@@ -14,9 +15,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !firstName }"
         />
-        <div v-show="submitted && !firstName" class="invalid-feedback">
-          First Name is required
-        </div>
+        <div v-show="submitted && !firstName" class="invalid-feedback">First Name is required</div>
       </div>
       <div class="form-group">
         <label for="lastName">Recipeint Last Name</label>
@@ -27,9 +26,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !lastName }"
         />
-        <div v-show="submitted && !lastName" class="invalid-feedback">
-          Last Name is required
-        </div>
+        <div v-show="submitted && !lastName" class="invalid-feedback">Last Name is required</div>
       </div>
       <div class="form-group">
         <label for="cardPrice">Gift Card Value (INR)</label>
@@ -40,17 +37,18 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !cardPrice }"
         />
-        <div v-show="submitted && !cardPrice" class="invalid-feedback">
-          Gift Card Value (INR) is required
-        </div>
+        <div
+          v-show="submitted && !cardPrice"
+          class="invalid-feedback"
+        >Gift Card Value (INR) is required</div>
       </div>
       <div class="form-group">
-        <label for="commissionPrice" class="form-control"
-          >Amount Payable (5% commission inclusive)</label
-        >
-        <label for="commissionPrice" class="form-control">{{
+        <label for="commissionPrice" class="form-control">Amount Payable (5% commission inclusive)</label>
+        <label for="commissionPrice" class="form-control">
+          {{
           commissionPrice
-        }}</label>
+          }}
+        </label>
       </div>
       <div class="form-group">
         <div>
@@ -64,9 +62,7 @@
           />
         </div>
 
-        <div v-show="submitted && !phoneNumber" class="invalid-feedback">
-          Recipeint Mobile Number
-        </div>
+        <div v-show="submitted && !phoneNumber" class="invalid-feedback">Recipeint Mobile Number</div>
       </div>
       <div class="form-group">
         <div>
@@ -80,14 +76,10 @@
           />
         </div>
 
-        <div v-show="submitted && !address" class="invalid-feedback">
-          Address is required
-        </div>
+        <div v-show="submitted && !address" class="invalid-feedback">Address is required</div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">
-          Place Order
-        </button>
+        <button class="btn btn-primary">Place Order</button>
       </div>
     </form>
   </div>
@@ -96,6 +88,7 @@
 <script>
 import orderservice from "../services/orderservice.js";
 import { store } from "../helpers/store.js";
+import Navigation from "@/components/Navigation";
 const orderStatus = {
   OutDelivery: "OUT FOR DELIVERY",
   Redeemed: "REDEMEED",
@@ -103,6 +96,7 @@ const orderStatus = {
 };
 export default {
   name: "NewOrder",
+  components: { Navigation },
   created() {
     if (!store.state.userSession.length) {
       this.$router.push({ name: "Login" });
@@ -123,10 +117,10 @@ export default {
     };
   },
   computed: {
-    commissionPrice: function() {
+    commissionPrice: function () {
       return (this.cardPrice * 5) / 100;
     },
-    activeUserName: function() {
+    activeUserName: function () {
       console.log(store.state.userSession[0]);
       return store.state.userSession[0];
     },
@@ -154,7 +148,7 @@ export default {
             console.log(data); // now the data is accessable from here.
             this.$router.push({ name: "OrderHistory" });
           })
-          .catch(function(response) {
+          .catch(function (response) {
             console.log(response);
           });
       }

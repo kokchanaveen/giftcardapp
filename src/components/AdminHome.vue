@@ -1,51 +1,50 @@
 <template>
-  <div key="componentKey">
-    <div>
-      <h2>Admin Home Page</h2>
+  <div>
+    <Navigation></Navigation>
+    <div key="componentKey">
+      <div>
+        <h2>Admin Home Page</h2>
+      </div>
+      <br />
+      <br />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>OrderId</th>
+            <th>Recipient Name</th>
+            <th>Ordered Date</th>
+            <th>Gift Card Value</th>
+            <th>Commission (5%)</th>
+            <th>Delivery Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="order in orderList" v-bind:key="order.id">
+            <td>{{ order.id }}</td>
+            <td>{{ order.firstName }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.cardPrice }}</td>
+            <td>{{ order.commission }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+              <button
+                v-if="order.status == 'OUT FOR DELIVERY'"
+                class="btn btn-primary"
+                v-on:click="updateDeliveryStatus(order.id)"
+              >Mark as Delivered</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <br />
-    <br />
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>OrderId</th>
-          <th>Recipient Name</th>
-          <th>Ordered Date</th>
-          <th>Gift Card Value</th>
-          <th>Commission (5%)</th>
-          <th>Delivery Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="order in orderList" v-bind:key="order.id">
-          <td>{{ order.id }}</td>
-          <td>{{ order.firstName }}</td>
-          <td>{{ order.orderDate }}</td>
-          <td>{{ order.cardPrice }}</td>
-          <td>{{ order.commission }}</td>
-          <td>{{ order.status }}</td>
-          <td>
-            <button
-              v-if="order.status == 'OUT FOR DELIVERY'"
-              class="btn btn-primary"
-              v-on:click="updateDeliveryStatus(order.id)"
-            >
-              Mark as Delivered
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
 <script>
 import { store } from "../helpers/store.js";
 import orderservice from "../services/orderservice.js";
-// global
-//import Vue from "vue";
-
+import Navigation from "@/components/Navigation";
 export default {
   name: "AdminHome",
   data() {
@@ -55,6 +54,7 @@ export default {
       componentKey: 0,
     };
   },
+  components: { Navigation },
   methods: {
     updateDeliveryStatus(orderId) {
       try {
@@ -68,7 +68,7 @@ export default {
               console.log(error);
             }
           )
-          .catch(function(response) {
+          .catch(function (response) {
             console.log(response);
           });
       } catch (err) {
@@ -97,13 +97,13 @@ export default {
           this.orderList = data;
           console.log(this.orderList); // now the data is accessable from here.
         })
-        .catch(function(response) {
+        .catch(function (response) {
           console.log(response);
         });
     },
   },
   computed: {
-    updatedorderList: function() {
+    updatedorderList: function () {
       return this.orderList;
     },
   },

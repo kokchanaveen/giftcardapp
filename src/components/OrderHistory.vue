@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navigation></Navigation>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -28,6 +29,7 @@
 <script>
 import { store } from "../helpers/store.js";
 import orderservice from "../services/orderservice.js";
+import Navigation from "@/components/Navigation";
 export default {
   name: "OrderHistory",
   data() {
@@ -35,6 +37,7 @@ export default {
       orderList: [],
     };
   },
+  components: { Navigation },
   created() {
     if (!store.state.userSession.length) {
       this.$router.push({ name: "Login" });
@@ -45,7 +48,7 @@ export default {
         this.orderList = data;
         console.log(data); // now the data is accessable from here.
       })
-      .catch(function(response) {
+      .catch(function (response) {
         console.log(response);
       });
   },

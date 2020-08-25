@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navigation></Navigation>
     <h2>Register</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
@@ -11,9 +12,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !username }"
         />
-        <div v-show="submitted && !username" class="invalid-feedback">
-          UserName is required
-        </div>
+        <div v-show="submitted && !username" class="invalid-feedback">UserName is required</div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -24,9 +23,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !password }"
         />
-        <div v-show="submitted && !password" class="invalid-feedback">
-          Password is required
-        </div>
+        <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confrim Password</label>
@@ -37,9 +34,10 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !confirmPassword }"
         />
-        <div v-show="submitted && !confirmPassword" class="invalid-feedback">
-          Confirm Password is required
-        </div>
+        <div
+          v-show="submitted && !confirmPassword"
+          class="invalid-feedback"
+        >Confirm Password is required</div>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -50,9 +48,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && !email }"
         />
-        <div v-show="submitted && !email" class="invalid-feedback">
-          Email is required
-        </div>
+        <div v-show="submitted && !email" class="invalid-feedback">Email is required</div>
         <div class="form-group">
           <div>
             <label for="admin">Is Admin</label>
@@ -65,16 +61,12 @@
             />
           </div>
 
-          <div v-show="submitted && !admin" class="invalid-feedback">
-            Is Admin is required
-          </div>
+          <div v-show="submitted && !admin" class="invalid-feedback">Is Admin is required</div>
         </div>
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary">
-          Register
-        </button>
+        <button class="btn btn-primary">Register</button>
         <router-link to="/" class="btn btn-link">Cancel</router-link>
       </div>
     </form>
@@ -85,6 +77,7 @@
 /* eslint-disable */
 import { mapState, mapActions } from "vuex";
 import userservice from "../services/userservice.js";
+import Navigation from "@/components/Navigation";
 export default {
   data() {
     return {
@@ -96,6 +89,7 @@ export default {
       submitted: false,
     };
   },
+  components: { Navigation },
   methods: {
     handleSubmit(e) {
       this.submitted = true;
@@ -113,7 +107,7 @@ export default {
             console.log(data); // now the data is accessable from here.
             this.$router.push({ name: "Login" });
           })
-          .catch(function(response) {
+          .catch(function (response) {
             console.log(response);
           });
       }

@@ -14,7 +14,7 @@ export const store = {
   },
 
   clearSession() {
-    this.state.userSession.splice(0, this.state.adminCollection.length);
+    this.state.userSession.splice(0, this.state.userSession.length);
     this.state.isAdmin = false;
   },
 
