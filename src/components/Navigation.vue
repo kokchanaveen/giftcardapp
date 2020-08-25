@@ -42,7 +42,7 @@
                 class="nav-link"
                 to="/AdminMonthlyReport"
                 v-if="userAdmin && showLogout"
-              >Admin Report</router-link>
+              >Admin Monthly Report</router-link>
             </li>
             <li class="nav-item">
               <router-link
